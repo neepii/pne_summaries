@@ -1,0 +1,72 @@
+** PRAKTIKA NA EVM
+
+* CLANG-FORMAT
+
+Можно создать папку .clang-format
+--dump-format делает конфигурацию на основе файла
+
+** Compilation database
+учитывает инклуды
+Можно сгенерировать
+
+*** bear
+Делает compilation database в .json
+
+Чтобы cmake учитывал датабэйс, добавь -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+в clang-tidy,  "-p build/"
+
+* Hack'аем
+** vuln.c
+В программе strcpy(name, buf) (Неизвестно какой размер name)
+
+** Виртуальная память
+Память программы - массив, по сути.
+
+Необязательно программа влезает в RAM, поэтому она виртуальная (VASPACE)
+
+Существует также Physical address space ( Это RAM, DMA(direct memory access), GPU) 
+
+** MMU
+Memory Management Unit
+** Модели раздавания памяти
+	+ Сегментная ВП
+		Узнавать начальный адрес, а потом смещаться 
+	+ Страничная ВП
+		Кусочечно раздавать память в physical address space
+		Metadata у каждого кусочка
+*** Архитектура фон Неймана
+Память и код лежит в одной памяти
+
+** /sys, /proc
+
+
+cat /proc/*PID*/maps , и ты увидишь память процесса
+
+** ASLR - Address Space Layout Randomizator
+Мы выключили рандомизатор -> две запущенные одинаковые программы имеет общую память 
+** Немножко о флагах
+-m32 - собрать программу под 32 битную multilib (ABI + architecture)
+-fno-stack-protector - откл. стэк протектор . При переполнении втыкивает в "канарейки" (уже нет)
+-z execstack - заставить линкер сделать стэк исполняемый 
+** ABI
+договорённость, чтобы программы работали в каком либо окружение.
+Если у проца нет FPU, ABI добавляет "библиотеку" с флотами
+** Calling convention
+** Assembler Thingys
+|    |                     push $rbp
+|    |                     mov %rsp, %rbp
+|    |
+|    |
+------ <= sp , (bp)
+|    |
+------
+|||||| <= bp
+
+ ret <=> mov %rbp, %rsp
+         pop %rbp
+ 
+** Code Injection
+
+Мы скомпилировали код, узнали байты коды ассемблеты и добавим их в программу
+
+Stack smashing detected

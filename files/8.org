@@ -1,0 +1,76 @@
+** PRAKTIKA NA EVM
+**** FLOATING POINT NUMBER
+
+
+* Первый сопроцессор - intel-8087
+
+FLD addr1
+FLD addr2
+FADD ST(0), ST(1)
+FSTP addr
+
+А теперь появился MMX и AVX)
+
+* Представление в памяти
+
+ M * B ^ E
+, где M - мантисса(сигнификант)
+     ,B - основание
+     ,E - экспонента
+
+** Нормальная форма 
+Мантисса принадлежит [0;1)
+** Нормализованная форма
+Мантисса принадлежит [1;<основание>)
+Но нет нуля...
+** Денормализованные числа
+eps1 -  eps2 ?
+E = E_min-1
+
+zeros in exponent? => denormalized
+mantissa has no leading zeros
+
+255 exponent and zero mantissa (nonzero) => infinity (Nan)
+
+M может быть:
+нулём (експонента 0, мантисса 0)
+не 0, M c нулевым неявным числом
+
+* IEEE 754 Standard
+M * B ^ ( E - 127 )
+
+* Union C
+union fl {
+	int i;
+	float f;
+} u;
+
+Можно проварачивать по-битовые операции
+\
+* Специальные представления
+Ноль (он со знаком)
+INF  ( Забит порядок, мантисса нулевая )
+NaN - ошибка арифметической операции ( Забит порядок, мантисса ненулевая )
+
+* Свойства операций
+
+(a*b)*c != a*(b*c)
+(a+b)+c != a+(b+c)
+(a+b)*c != (a*c)+(b+c)
+
+NaN == NaN gives false
+
+* Сравнение чисел с плавающей точкой
+[[https://floating-point-gui.de/errors/comparision][насчёт сравнений]]
+What Every Computer Scientist Should Know about Floating Point Number
+
+* XOR Recover files
+X1 ^ X2 ^ X3 = X4
+
+ Дано: X2, X3, X4
+ Найти: X1
+X2 ^ X3 ^ X4 = X2 ^ X3 ^ (X1 ^ X2 ^ X3) = X1, because X ^ X = 0
+ 
+* Гарантированный порядок (три символа)
+&& || ,
+

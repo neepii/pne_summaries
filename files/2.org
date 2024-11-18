@@ -1,0 +1,131 @@
+** PRAKTIKA NA EVM
+
+* Literature
+ Pro Git (on git.com)
+Control version
+
+* Motivaiton:
+ syncronize
+ reverse changes
+ reverse bad code
+ author
+ branches
+
+* History:
+ source code control system (1972)
+ Revision control code (2022)
+ CVS (1990-2008)
+
+ Central systems: (server always required)
+   perforce (1995)
+   sybversion (2004)
+
+   
+ scattered systems: (local changes)
+   Mercurial (2005)
+   Git (2005)
+
+ local computer
+ 
+ checkout    version database
+ file -----> version 1
+                |
+               \|/
+	     version 2
+
+* Git-repo
+working tree -> staging area -> .git dir
+
+* File Life-cycle
+ untracked -> staged (git add)
+ also modified or unmodified (git commit)
+
+* Commit
+what's inside:
+  previous commit (hashsum)
+  diff file
+  author, his/her email
+
+describe fully what you did in commit, get a hang in it
+
+* flags
+without -m flag first line is the name of commit, the rest is description 
+-p - line by line commit (patch mode)
+
+
+
+HEAD - shortcut of current branch (git checkout HEAD does nothing)
+----------------------
+
+     HEAD
+      |
+     \|/
+     master
+      |
+     \|/
+     commit n
+      |
+     \|/     
+     commit n-1
+     ...
+
+----------------------
+* Remote
+  git remote -v - outputs all "connections"
+* Branch
+  Name
+  Moves when commiting
+  In general equal (?)
+* Merge
+  create commit out of two or more parents
+  conflicts may appear ( fu merge conflicts )
+  Merge is not one way to conjoin branches
+
+* Rebase
+  Another way to "Merge" (removes chunk of history, which is bad)
+  Adds commit from a branch on top of another
+  * git rebase -i   - is an interactive mode (rebase - moves base on top)
+      Clue together branches
+  It is a good idea to backup files when using rebase, good for beginners (git branch backup-br)
+* Switch / Checkout
+    Switch is good for beginners
+    
+* Fetch
+  You need to be careful _FETCH_
+
+
+* Push
+  You need to be specific when pushing commits
+  -u = --set-upstream _UPSTREAM_
+
+**** INTERESTING KEY POINTS
+  
+*** git pull = git fetch + git merge
+
+*** YOU CAN ALSO USE SSH INSTEAD OF TOKENS ON GITHUB
+
+* Blame
+  Understand what and who did anything
+  
+* Cherry-Pick
+  Essentialy rebase but vice-versa
+
+* Stash
+  Save local changes and use them later
+* ETC
+** Multi Programming
+  Fork - is just copy of a repo
+  _UPSTREAM_ - original repo
+** GOOD PRACTICE
+  dont commit what is already commited
+  commit often
+  dont use dot in git add (stage less garbage)
+  dont commit in main/master
+  check diff in pull-request
+  be careful with git push --force (--force-with-lease is better)
+  push only in own branches (some kind of ethic)
+
+
+  Also,
+    git != gitHub
+

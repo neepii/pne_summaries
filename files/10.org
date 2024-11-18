@@ -1,0 +1,116 @@
+** УКАЗАТЕЛИ И ВЫРАВНИВАНИЕ
+* Watch
+[[www.youtube.com/watch?v=zuegQmMdy8M][3 hours and 47 minutes]]
+ERIC S. RAYMOND The lost art of structure packing (2014)
+
+* L-value and R-value
+L - variables
+R - pointers
+int L = R;
+R -> literals
+R -> variables
+* & and *
+Кутуев балуется с указателями:
+	int x = 5;
+	+ Показывает int *a = &x;
+	+ void * - универсальный, при дереференсе компилятор ругается
+	+ При float *c = &x; тоже ругается
+	+ При тайп кастах НЕ ругается
+
+** two pointers usage
+	float *d = a; ругается
+	float *d = (void *)a; Работает!?!!?! 
+
+	Когда переменная с каким-то нон-войд типом принимает значение void * - то происходит некая "Автоматический тайп кастов"
+** string
+char *p = "Abc"; works (ASCIIz)
+BUT THIS IS READ-ONLY MEMORY
+
+*p = 'B' -> SIGFAULT
+** SOLUTIONS
+*** 1
+	char *p = strdup("Abc"); // strdup allocates, which you need to use free()
+	*p = B;
+*** 2
+	char s[] = "Abc";
+	char *p = s;
+	*p = B;
+
+* (void *)
+
+** swap function for void * elements
+
+void swap(void *a, void* b, size_t size) {
+	char * tmp = (char*) malloc(size);
+	memcpy(tmp, a, size);
+	memcpy(a, b, size);
+	memcpy(b, tmp, size);
+	free(tmp);
+}
+
+
+* address arithmetic
+** operation
+1. add using integers
+2. subtract using integers
+3. subtract using pointers
+   no add using pointers
+** TODO Размер
+	pointer += k; <=> pointer = pointer + k * sizeof(type);
+
+* Arrays
+	Массив - последовательность однотипных элементов без промежутков
+	Поведение массивов и указателей очень похожи, но есть всё-таки разницы
+
+* sizeof()
+	sizeof(STACK_ARRAY) = element_count_in_array * sizeof(STACK_ARRAY[0])
+	sizeof(POINTER) = sizeof(void *)
+
+* Multi declaration
+int *a, *b, c;
+c is not a pointer
+* POST and PRE iNCREMENTATION
+* Don't use Exit() function
+* Undefined Behavior
+Присваивайте значения переменным, иначе будет UB
+
+#define NULL (void * ) 0
+
+* Function Pointer
+	int (*p)(int) = next;
+	int (*q)(int) = &next;
+	print(p(0), (*p)(1), q(2)); works
+
+* Выравнивание
+Каждый non-char тип требует выравнивания:
+Short (16bit) с чётного байта
+int32_t c номера байта, кратного 4
+
+Всё это для того, чтобы компу было легче обращаться к памяти
+
+#pragma pack - чтобы убрать эту фичу
+__attribute__((packed, alighed(1))) тоже
+* BIT-FIELD
+struct str {
+	int bigfield1:31; // first 32 bit block
+	int licodelefield1:1;
+	int bigfield2:31; // second 32 bit block
+	int licodelefield2:1;
+}
+struct str {
+	int bigfield1:31;
+	int bigfield2:31;
+	int licodelefield1:1;
+	int licodelefield2:1; // start of third inteer
+}
+struct str {
+	int bigfield1:31;
+	int :0; // force end memory block
+	int licodelefield1:1; // start of second integer
+	..........
+	int something:1;
+	int :7; // fills memory
+}
+
+** структуры могут идти подряд в памяти с пустыми промежутками 
+* ALIGNMENT TRAP

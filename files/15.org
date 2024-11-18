@@ -1,0 +1,61 @@
+** PRAKTIKA NA EVM
+
+* Abstract Data Type
+
+** Linked list
+
+struct node_s {
+	void *data;
+	struct node_s* next;
+}
+
+->()->()->()->()->NULL
+** Как учитывать NULL и не обос$@#!
+*** sentinal
+->(fix)->NULL  страж, предохраняет от NULL
+
+->(fix)->()->()-|
+        /|\     |     циклический
+         |______|
+
+*** metadata
+
+->(size:3)->()->()->()->NULL
+
+->(size:3)->()->()->()->NULL
+         |          /|\
+         |___________|
+*** double linked lists
+
+** ArrayList
+** Stack (FILO, LIFO)
+** Queue (FIFO)
+** Priority queue
+** (maps/dictionaries)
+*** HASHMAPS
+Нет Порядка
+*** TREEMAPS
+** Sets
+*** HASHSET
+Есть порядок, ну похуже время алгоритмов
+
+* О паттернах реализации
+
+** GLIB
+
+** если вы используйте adt для своих собственных...
+Ограничивайте
+else Плохо, ошибки будут.
+
+* Finite automata
+
+** KMP Algo
+** Boyer Moore algo
+
+* Good Practice
+
+#include "first_user_defined_header.h"
+
+#include <then_libraries.h>
+
+Тут на лекции упомянули то, что рекомендуется инклудить пользовательские хэдэры, потом библиотеки.

@@ -1,0 +1,60 @@
+** PRAKTIKA NA EVM
+
+GCC - Это тулЧэйн
+
+* -save-temps
+** файл .i
+	Файл после препроцессора
+** файл .s
+	Ассемблер
+** файл .o
+	ОбЪект файл
+	продукт компиляции
+	можно использовать HexDump
+** файл исполняемый
+	runtime запускает (до функции main)
+	
+* flags
+ -E - post-preproccesor file
+ -S - assembly file 
+ -c - object file
+* ld - GNU Linker
+если вы хотите передать дополнительную информацию линкеру, добавьте к GCC:
+	-Wl,<ваш флаг>
+* Declaration and definition
+int distance(int a, int b); - Это декларация или прототип 
+
+int distance(int a, int b) - Это уже само определение функции
+{
+ 	return abs(b-a);
+}
+
+* Header guards
+** pragma @once
+** ifndef define endif
+* Header Files
+	static inline можно использовать для определения локальных функции 
+	static в первую очередь используются над функцией с тем названиям без статика
+* -I flag
+	include директория
+	Пример: gcc -I dist main.c dist/distance.c
+
+
+* Preprocessor
+** Macro
+	#define abs1(x) x > 0 ? x : -x
+	#define abs2(x) ((x > 0) ? (x) : -(x))
+	Второй вариант лучше и надёжнее
+
+* Optimizations
+	-O0 -O1 -O2 -O3
+** Раскрытие циклов
+** Замена инструкций
+** Раскрытие внутренних методов (Inline)
+** использование SSE/AVX
+* restrict keyword
+Гарантия того, что память не пересекается
+ 
+
+* Предупреждения
+ Флажок -Wall, -Werr, -Wpedantic, -Wextra

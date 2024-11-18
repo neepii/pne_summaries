@@ -1,0 +1,89 @@
+** PRAKTIKA NA EVM
+
+* Sorting Algorithms
+
+Вместо того, чтобы использовать fopen/fclose, можно использовать mmap
+
+mmap - memory map
+
+** Bubble Sort
+
+O(n^2) - сложность
+
+f(n) принадлежит О(g(n))
+There's exists N > 0, C > 0 such that n > N such that | f(n) | <= | C * g(n) |
+
+f(x) принадлежит O(g(n)), There's exist C > 0, x принадлежит U( выколотая )(x)
+
+Already sorted array completes at O(n)
+
+** Insertion Sort
+O(n^2) - сложность
+
+** Стабильность сортировок
+
+** Selection Sort
+Может быть устойчивым
+for (size_t i = 0; i < n - 1; ++i) {
+	size_t min = i;
+	for (size_t j = 0; j < n - 1; ++j) {
+		if (a[j] < a[min]) { min = j;}
+	}
+	swap(&a[i], &a[min]);
+}
+
+* Data Structure
+
+** Heap/Priority queue
+BST
+        ()  <- корень 
+       /    \
+      ()       () h = 2 (height)
+     /  \     /  \
+   ()    ()  ()   ()
+   |     |
+ листья  |
+
+ pqueue
+          (2) 
+       /      \
+      (3)       (5) 
+     /  \       /   \
+   (6)    (4)  (7)   (8)
+
+   Parents values < Children values (always)
+
+   
+          (2) 
+       /      \
+      (3)       (5) 
+     /  \       /   \
+   (6)    (4)  (7)   (8)
+  /
+ (1)
+
+** Heap Sort
+Добавить все элементы в pqueue и извлечь
+
+Как перемещаться?
+
+     i
+    / \
+2i+1   2i+2
+
+** Merge Sort
+
+** Quick Sort
+
+** Radix Sort
+Сортировка по разрядам
+
+** Counting Sort
+
+** SAT
+
+*** Лирическое отступление: Формализация задач 
+
+
+
+

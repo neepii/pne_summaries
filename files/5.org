@@ -1,0 +1,57 @@
+** PRAKITIKA NA EVM
+
+* LINUX REPO
+
+Ведётся не на ГитХабе - отправляются патчи
+
+Ветки обсуждения
+
+Есть сайт с документацией
+Всё о процессе разработки, как отправлять патчи
+
+* КОД СТАЙЛ (getting the code right)
+********* ВОРУЙ КОДСТАЙЛЫ >:D
+** STRING SPLITTING
+
+	запрещено перенос строк(уходшает поиск)
+		| "abcde" |
+		| "fgijk" |
+
+** function
+
+type name_of_function(type a, type b,
+		      type c, type d)
+{
+	if (predicate)
+		another_func(a, b);
+		}
+*** Некоторые пишут ретурн тайп в отдельной строке
+type
+name_of_function(type a, type b,
+		      type c, type d)
+{
+	if (predicate)
+		another_func(a, b);
+		}
+** CHECKPATCH
+	В ядре есть проверка на корректность стиля кода
+
+** variable name
+	Через нижнее подчёркивание
+* Документация
+Торвальдс сделал свою прогу для генерации документации
+** Doxygen
+** Conventional commits
+Унифицированное соглашение о оформлении названий коммитов
+
+** Branch Naming
+git branch <category/reference/description-in-kebab-case>
+
+* GIT HOOKS
+Перед запусками команд, хуки запускают юзер дефайнд скрипты
+Например, перед пушем можно сразу проверить на корректность стиля кода
+Можно использовать баш, или даже питон, но файл должен иметь разрешение .sample
+* GITHUB FEATURES
+** TOKENS
+Либо через SSH, либо через HTTP ( Токены )
+** VERTIFICATION

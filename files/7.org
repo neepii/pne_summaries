@@ -1,0 +1,88 @@
+** PRAKTIKA NA EVM
+
+Расширение сознания
+		- Кутуев
+ 
+main.c -> cc1 -> .s -> as -> .o |    (crt*) + (libc)
+lib.c -> cc1 -> .s -> as -> .o  | --> collect2 -------> ld ------> a.out
+
+cc1 - Программа, одна из составляющих GCC
+collect2 - Обёртка, не линкерp
+ld - Link eDitor / Редактор Связей / Компоновщик
+gcc - compiler driver / toolchain / система компиляции
+
+** Runtime
+	start streams
+	setting locals
+	exit code
+	stack calls
+	accept arguments for main functions (argc , argv)
+	
+
+there also exists files which start with crt*
+
+_start -> __libc_start_main -> main
+
+if theres no argc, argv then the arguments will be passed
+
+* Calling convention
+Соглашения вызовов могут быть разные
+Смотри ABI
+* Когда запускается программа выделяется память для
+Кода
+Куча
+Стэк
+* Почему существуют регистры
+ Процессору чтобы долго не идти в оперативке через шину (Bus)
+ , он при себе имеет регистры
+* GDB MAGIC
+p *((char *) $rsi)@4
+
+ASCIIz - Представления строк, где z означает Zero-Terminating
+* Linker
+Разбирается кто кого вызывает
+Компонует
+
+ld, gold, lld (llvm)
+* Второй Ld
+	ld - loader
+* Статическая/Динамическая библиотека
+	Статически добавлять - значит тупо сувать библиотеку в программу, отчего она раздувается
+	
+	.so - shared object (для Линукса)
+	.dll - dynamic link library (для Виндовса)
+
+	e.g
+
+	libmy.so
+
+	prog1 prog2
+	у каждой проги своя память
+	Нужна библиотека? Берет и подружает .so
+	Нужна библиотека? Ещё раз? Она уже подгружена, можешь просто брать функции
+	Поэтому она динамическая 
+* Cross Compilation
+ Build - на которой будет собирать кросс-компилятор
+ Host - над которой запускаем кросс-компилятор 
+ Target - под которую компилируем 
+
+ b == h == t - просто компиляция
+ b == h != t - классическая компиляция
+ b != h == t - cross-native
+ b != t == h - (google it)
+ b != h != t - cross-canadian
+* list
+- compilator, as, objdump
+- gcc, ld, crt
+- header files, ...
+- libc, other  libraries
+* sysroot
+-print-sysroot flag shows sysroot, where include files are located
+* OS vs Bare Metal
+* ldd
+Show what libs do you need to execute file
+* H/w
+***** Почитать
+DLL-HELL
+vdso.so
+
