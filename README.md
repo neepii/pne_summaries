@@ -7,4 +7,4 @@
 Отправляете Pull Request или пишите мне в телеграм
 
 # Контакты
-[telegram](t.me/Neepiiii)
+[telegram](https//t.me/Neepiiii)
